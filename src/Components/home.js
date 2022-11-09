@@ -3,9 +3,10 @@ import Navbar from "./navbar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import './home.css'
+import { useParams } from "react-router";
 
-class Home extends React.Component {
-  render() {
+function Home(){
+    const {name} = useParams();
     return (
       <div>
         <Navbar />
@@ -15,7 +16,7 @@ class Home extends React.Component {
         <div class="panel profile-cover">
             <div class="profile-cover__img">
                 <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" />
-                <h3 class="h3">Mohit Pandey</h3>
+                <h3 class="h3">{name}</h3>
             </div>
             <div class="profile-cover__action bg--img" data-overlay="0.3">
                 <button class="btn btn-rounded btn-info">
@@ -168,6 +169,5 @@ class Home extends React.Component {
       </div>
     )
   }
-}
 
 export default Home;

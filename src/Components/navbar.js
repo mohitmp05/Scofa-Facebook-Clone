@@ -5,7 +5,7 @@ class Navbar extends React.Component {
     return (
       <div>
       <div class="ui secondary pointing menu">
-  <a class="item" href="/home">
+  <a class="item" href="#">
     Home
   </a>
   <a class="item" href="/messages" >
@@ -16,6 +16,9 @@ class Navbar extends React.Component {
   </a>
   <a class="item" href="/requests">
     Friend Requests
+  </a>
+  <a class="item" href="/settings">
+    Settings
   </a>
   <div class="right menu">
     <a class="ui item active" href="/logout">

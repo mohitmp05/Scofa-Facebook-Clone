@@ -1,16 +1,26 @@
 import React from "react";
 import logo from "../Images/logo.png";
 import "./homepage.css";
-
+import { connect } from "react-redux";
+import { userAuth } from "../actions/scofaActions";
 
 class Homepage extends React.Component {
+  user = { email: "", password: "" };
+
+  handleForm = (e) => {
+    e.preventDefault();
+    this.setState({email:this.user.email,password:this.user.password})
+    this.props.dispatch(userAuth(Object.assign({}, this.user)));
+    e.target.reset();
+  };
+
   render() {
     return (
       <div id="body" className="ui two column grid">
         <div className="row">
           <div id="brand" className="column">
-            <img src={logo} class="ui small image" />
-            <h3 class="ui header">
+            <img src={logo} className="ui small image" />
+            <h3 className="ui header">
               Scofa helps you connect and
               <br />
               share with the people in your life.
@@ -21,52 +31,61 @@ class Homepage extends React.Component {
             <div
               id="container"
             >
-              <div class="ui middle aligned center aligned grid">
-                <div class="column">
-                  <h1 class="ui blue header">
-                    <div class="content">Log-in to your account</div>
+              <div className="ui middle aligned center aligned grid">
+                <div className="column">
+                  <h1 className="ui blue header">
+                    <div className="content">Log-in to your account</div>
                   </h1>
-                  <form class="ui large form">
-                    <div class="ui stacked segment">
-                      <div class="field">
-                        <div class="ui left icon input">
-                          <i class="user icon"></i>
+                  <form className="ui large form" onSubmit={this.handleForm}>
+                    <div className="ui stacked segment">
+                      <div className="field">
+                        <div className="ui left icon input">
+                        <i className="envelope icon"></i>
                           <input
                             type="text"
                             name="email"
                             placeholder="E-mail address"
+                            onChange={(e) => {
+                              this.user.email = e.target.value;
+                            }}
                           />
                         </div>
                       </div>
-                      <div class="field">
-                        <div class="ui left icon input">
-                          <i class="lock icon"></i>
+                      <div className="field">
+                        <div className="ui left icon input">
+                          <i className="lock icon"></i>
                           <input
                             type="password"
                             name="password"
                             placeholder="Password"
+                            onChange={(e) => {
+                              this.user.password = e.target.value;
+                            }}
                           />
                         </div>
                       </div>
-                      <div class="ui fluid large blue submit button"><a style={{textDecoration:'none', color:'white'}} href="/home">Login</a></div>
+                      <button className="ui fluid large blue submit button" type="submit">Login</button>
                     </div>
 
-                    <div class="ui error message"></div>
+                    <div className="ui error message"></div>
                   </form>
 
-                  <div class="ui message">
-                    <a href="#">Forgotten password?</a>
+                  <div className="ui message">
+                    <a style={{textDecoration:'none'}} href="/reset">Forgotten password?</a>
                   </div>
-                  <div class="ui green submit button">Create New Account</div>
+                  <div className="ui green submit button"><a style={{textDecoration:'none', color:'white'}} href="/register">Create New Account</a></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <body></body>
       </div>
     );
   }
 }
 
-export default Homepage;
+function mapStateToProps(state) {
+  return {};
+}
+
+export default connect(mapStateToProps)(Homepage);

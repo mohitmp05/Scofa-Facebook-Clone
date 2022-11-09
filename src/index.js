@@ -6,24 +6,35 @@ import Home from './Components/home';
 import Friends from './Components/friends';
 import Message from './Components/message';
 import Allrequests from './Components/allrequests';
-import { BrowserRouter as Router, Routes, Route}
-	from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Register from './Components/register';
+import ForgotPass from './Components/forgotpass';
+import Settings from './Components/settings';
+import UpdateAcc from './Components/updateAcc';
+import store from "./store";
+import { Provider } from "react-redux";
 
 const App = () =>{
   return(
-    <Router>
+    <Provider store={store}>
+    <BrowserRouter>
     <div className='app'>
-    <Routes>
-    <Route path='' element={<Homepage/>} />
-    <Route path='/home' element={<Home/>} />
-    <Route path='/messages' element={<Message/>} />
-    <Route path='/friends' element={<Friends/>} />
-    <Route path='/requests' element={<Allrequests/>} />
-    <Route path='/logout' element={<Homepage/>} />
-    </Routes>
+    <Switch>
+    <Route exact path='/'><Homepage/></Route>
+    <Route path='/home/:name'><Home/></Route>
+    <Route path='/register'><Register/></Route>
+    <Route path='/reset'><ForgotPass/></Route>
+    <Route path='/messages'><Message/></Route>
+    <Route path='/friends'><Friends/></Route>
+    <Route path='/requests'><Allrequests/></Route>
+    <Route path='/settings'><Settings/></Route>
+    <Route path='/update'><UpdateAcc/></Route>
+    <Route path='/logout'><Homepage/></Route>
+    </Switch>
     <Footer />
     </div>
-    </Router>
+    </BrowserRouter>
+    </Provider>
   )
 }
 
